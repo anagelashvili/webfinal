@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Details | TravelEase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cookie Notification -->
+    <div class="cookie-notification">
+        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+        <button id="accept-cookies">Accept</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">TravelEase</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hotel Details Section -->
+    <section class="hotel-details">
+        <div class="container">
+            <div class="hotel-main">
+                <h1 id="hotel-name">Grand Plaza Hotel</h1>
+                <div class="hotel-meta">
+                    <span class="rating">★★★★☆ 4.2</span>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> New York, USA</span>
+                </div>
+                
+                <!-- Image Gallery -->
+                <div class="hotel-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Grand Plaza Hotel" id="main-image">
+                    </div>
+                    <div class="thumbnail-container">
+                        <div class="thumbnail active" data-image="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Hotel Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-image="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Hotel Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-image="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80">
+                            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Hotel Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-image="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+                            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Hotel Thumbnail">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hotel-description">
+                    <h2>About This Hotel</h2>
+                    <p>Located in the heart of New York City, Grand Plaza Hotel offers luxurious accommodations with stunning city views. Our hotel features world-class amenities including a rooftop pool, spa, and multiple dining options. Each room is elegantly designed with modern comforts to ensure a memorable stay.</p>
+                    
+                    <h3>Amenities</h3>
+                    <div class="amenities-list">
+                        <div class="amenity"><i class="fas fa-wifi"></i> Free WiFi</div>
+                        <div class="amenity"><i class="fas fa-swimming-pool"></i> Swimming Pool</div>
+                        <div class="amenity"><i class="fas fa-dumbbell"></i> Fitness Center</div>
+                        <div class="amenity"><i class="fas fa-utensils"></i> Restaurant</div>
+                        <div class="amenity"><i class="fas fa-parking"></i> Parking</div>
+                        <div class="amenity"><i class="fas fa-spa"></i> Spa</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking-sidebar">
+                <div class="booking-card">
+                    <h2>Book Your Stay</h2>
+                    <form id="booking-form">
+                        <div class="form-group">
+                            <label for="check-in-date">Check-in</label>
+                            <input type="date" id="check-in-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="check-out-date">Check-out</label>
+                            <input type="date" id="check-out-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="room-type">Room Type</label>
+                            <select id="room-type" required>
+                                <option value="">Select Room Type</option>
+                                <option value="standard">Standard Room - $199/night</option>
+                                <option value="deluxe">Deluxe Room - $299/night</option>
+                                <option value="suite">Suite - $499/night</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Guests</label>
+                            <select id="guests" required>
+                                <option value="1">1 Guest</option>
+                                <option value="2" selected>2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                            </select>
+                        </div>
+                        <div class="price-summary">
+                            <div class="price-item">
+                                <span>3 nights</span>
+                                <span>$897</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Taxes & Fees</span>
+                                <span>$89.70</span>
+                            </div>
+                            <div class="price-item total">
+                                <span>Total</span>
+                                <span>$986.70</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Book Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <div class="container">
+            <h2>Guest Reviews</h2>
+            <div class="reviews-list" id="reviews-container">
+                <!-- Reviews will be loaded from API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your trusted partner in hotel bookings worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>info@travelease.com</p>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="hotel-details.js"></script>
+</body>
+</html>

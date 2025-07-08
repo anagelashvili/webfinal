@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "Legolas Costume",
+        "price": 149.99,
+        "category": "lotr",
+        "description": "Elven archer costume with bow replica"
+    },
+    {
+        "id": 2,
+        "name": "Iron Man Suit",
+        "price": 349.99,
+        "category": "marvel",
+        "description": "Mark III armor with light-up reactor"
+    },
+    {
+        "id": 3,
+        "name": "Darth Vader Suit",
+        "price": 299.99,
+        "category": "starwars",
+        "description": "Premium replica with helmet"
+    }
+]
