@@ -1,193 +1,152 @@
-// DOM Elements
-const burger = document.querySelector('.burger');
-const navLinks = document.querySelector('.nav-links');
-const scrollToTopBtn = document.getElementById('scroll-to-top');
-const cookieNotification = document.querySelector('.cookie-notification');
-const acceptCookiesBtn = document.getElementById('accept-cookies');
-const newsletterForm = document.getElementById('newsletter-form');
-const featuredHotelsContainer = document.getElementById('featured-hotels');
-const weatherContainer = document.getElementById('weather-data');
-
-// Burger Menu Toggle
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('toggle');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        burger.classList.remove('toggle');
+// script.js - Complete Working Solution
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Cookie Notification
+    const cookieNotification = document.querySelector('.cookie-notification');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+    
+    if (!localStorage.getItem('cookiesAccepted')) {
+        cookieNotification.style.display = 'flex';
+    }
+    
+    acceptCookiesBtn.addEventListener('click', function() {
+        cookieNotification.style.display = 'none';
+        localStorage.setItem('cookiesAccepted', 'true');
     });
-});
 
-// Scroll to Top Button
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'flex';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
+    // 2. Mobile Navigation
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
     
-    // Header background change on scroll
-    if (window.pageYOffset > 50) {
-        document.querySelector('header').classList.add('header-scrolled');
-    } else {
-        document.querySelector('header').classList.remove('header-scrolled');
-    }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    burger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('toggle');
     });
-});
 
-// Cookie Notification
-if (!localStorage.getItem('cookiesAccepted')) {
-    cookieNotification.style.display = 'flex';
-}
-
-acceptCookiesBtn.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'true');
-    cookieNotification.style.display = 'none';
-});
-
-// Newsletter Form Validation
-newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = newsletterForm.querySelector('input').value;
+    // 3. Scroll to Top Button
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
     
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
-        return;
-    }
-    
-    // Store in localStorage
-    let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
-    subscribers.push(email);
-    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
-    
-    alert('Thank you for subscribing!');
-    newsletterForm.reset();
-});
-
-// Fetch Featured Hotels from API
-async function fetchHotels() {
-    try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        const data = await response.json();
-        
-        // Limit to 6 hotels for display
-        const hotels = data.slice(0, 6);
-        
-        hotels.forEach(hotel => {
-            const price = Math.floor(Math.random() * 300) + 50;
-            const rating = (Math.random() * 2 + 3).toFixed(1);
-            
-            const hotelCard = document.createElement('div');
-            hotelCard.className = 'hotel-card';
-            hotelCard.innerHTML = `
-                <div class="hotel-img">
-                    <img src="https://source.unsplash.com/random/600x400/?hotel,${hotel.id}" alt="${hotel.name}">
-                </div>
-                <div class="hotel-info">
-                    <h3>${hotel.company.name}</h3>
-                    <p>${hotel.address.city}, ${hotel.address.street}</p>
-                    <div class="hotel-price">
-                        <span class="price">$${price}/night</span>
-                        <span class="rating">⭐ ${rating}</span>
-                    </div>
-                </div>
-            `;
-            
-            featuredHotelsContainer.appendChild(hotelCard);
-        });
-    } catch (error) {
-        console.error('Error fetching hotels:', error);
-        featuredHotelsContainer.innerHTML = '<p>Unable to load hotels. Please try again later.</p>';
-    }
-}
-
-// Fetch Weather Data from API
-async function fetchWeather() {
-    const cities = ['New York', 'London', 'Paris', 'Tokyo', 'Dubai'];
-    
-    try {
-        for (const city of cities) {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=YOUR_API_KEY`);
-            const data = await response.json();
-            
-            const weatherCard = document.createElement('div');
-            weatherCard.className = 'weather-card';
-            
-            // Get weather icon
-            const iconCode = data.weather[0].icon;
-            const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-            
-            weatherCard.innerHTML = `
-                <h3>${city}</h3>
-                <img src="${iconUrl}" alt="${data.weather[0].description}" class="weather-icon">
-                <p>${Math.round(data.main.temp)}°C</p>
-                <p>${data.weather[0].description}</p>
-            `;
-            
-            weatherContainer.appendChild(weatherCard);
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'flex';
+        } else {
+            scrollToTopBtn.style.display = 'none';
         }
-    } catch (error) {
-        console.error('Error fetching weather:', error);
-        
-        // Fallback data if API fails
-        const fallbackCities = [
-            { city: 'New York', temp: 22, desc: 'Sunny' },
-            { city: 'London', temp: 18, desc: 'Cloudy' },
-            { city: 'Paris', temp: 20, desc: 'Partly Cloudy' },
-            { city: 'Tokyo', temp: 25, desc: 'Rainy' },
-            { city: 'Dubai', temp: 35, desc: 'Hot' }
-        ];
-        
-        weatherContainer.innerHTML = '<p>Weather data unavailable. Showing sample data.</p>';
-        
-        fallbackCities.forEach(city => {
-            const weatherCard = document.createElement('div');
-            weatherCard.className = 'weather-card';
-            weatherCard.innerHTML = `
-                <h3>${city.city}</h3>
-                <p>${city.temp}°C</p>
-                <p>${city.desc}</p>
-            `;
-            
-            weatherContainer.appendChild(weatherCard);
+    });
+    
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    }
-}
+    });
 
-// Initialize functions when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    fetchHotels();
-    fetchWeather();
+    // 4. Featured Hotels
+    const featuredHotels = [
+        {
+            id: 1,
+            name: "Grand Plaza Hotel",
+            city: "New York",
+            price: 299,
+            rating: 4.5,
+            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+            amenities: ["wifi", "pool", "gym"]
+        },
+        {
+            id: 2,
+            name: "Beach Resort",
+            city: "Miami",
+            price: 349,
+            rating: 4.2,
+            image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+            amenities: ["wifi", "pool", "spa"]
+        },
+        {
+            id: 3,
+            name: "Mountain Lodge",
+            city: "Aspen",
+            price: 229,
+            rating: 4.7,
+            image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+            amenities: ["wifi", "gym", "fireplace"]
+        }
+    ];
+
+    const hotelsContainer = document.getElementById('featured-hotels');
     
-    // Add animation to sections when they come into view
-    const sections = document.querySelectorAll('section');
+    featuredHotels.forEach(hotel => {
+        const hotelCard = document.createElement('div');
+        hotelCard.className = 'hotel-card';
+        hotelCard.innerHTML = `
+            <div class="hotel-img">
+                <img src="${hotel.image}" alt="${hotel.name}" loading="lazy">
+            </div>
+            <div class="hotel-info">
+                <h3>${hotel.name}</h3>
+                <p class="location">${hotel.city}</p>
+                <div class="hotel-meta">
+                    <span class="rating">${'★'.repeat(Math.floor(hotel.rating))}${'☆'.repeat(5-Math.floor(hotel.rating))} ${hotel.rating}</span>
+                </div>
+                <div class="hotel-price">
+                    <span class="price">$${hotel.price}/night</span>
+                    <a href="hotels.html?id=${hotel.id}" class="btn">Book Now</a>
+                </div>
+            </div>
+        `;
+        hotelsContainer.appendChild(hotelCard);
+    });
+
+    // 5. Weather Widget
+    const weatherData = [
+        { city: "New York", temp: 22, icon: "☀️", desc: "Sunny" },
+        { city: "Paris", temp: 18, icon: "⛅", desc: "Partly Cloudy" },
+        { city: "Tokyo", temp: 25, icon: "🌧️", desc: "Rainy" }
+    ];
+
+    const weatherContainer = document.getElementById('weather-data');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
+    weatherData.forEach(weather => {
+        const weatherCard = document.createElement('div');
+        weatherCard.className = 'weather-card';
+        weatherCard.innerHTML = `
+            <h3>${weather.city}</h3>
+            <div class="weather-icon">${weather.icon}</div>
+            <p>${weather.temp}°C</p>
+            <p>${weather.desc}</p>
+        `;
+        weatherContainer.appendChild(weatherCard);
+    });
+
+    // 6. Newsletter Form
+    const newsletterForm = document.getElementById('newsletter-form');
     
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        observer.observe(section);
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const emailInput = e.target.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+        
+        // Basic email validation
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert('Thank you for subscribing to our newsletter!');
+            newsletterForm.reset();
+            
+            // Store email in localStorage
+            let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+            subscribers.push(email);
+            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+        } else {
+            alert('Please enter a valid email address');
+            emailInput.focus();
+        }
+    });
+
+    // 7. Header Scroll Effect
+    const header = document.querySelector('header');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     });
 });
